@@ -56,7 +56,6 @@ describe('SignatureController (e2e)', () => {
 
     prisma = moduleFixture.get<PrismaService>(PrismaService);
 
-    // Criar usuário e obter token
     const registerResponse = await request(app.getHttpServer())
       .post('/auth/register')
       .send(testUser);
@@ -64,7 +63,6 @@ describe('SignatureController (e2e)', () => {
     authToken = registerResponse.body.token;
     testUserId = registerResponse.body.user.id;
 
-    // Criar ocorrência para teste
     const occurrenceResponse = await request(app.getHttpServer())
       .post('/occurrences')
       .set('Authorization', `Bearer ${authToken}`)
@@ -146,7 +144,6 @@ describe('SignatureController (e2e)', () => {
   });
 
   it('deve deletar uma assinatura', async () => {
-    // Criar assinatura temporária para deletar
     const createResponse = await request(app.getHttpServer())
       .post('/signatures')
       .set('Authorization', `Bearer ${authToken}`)

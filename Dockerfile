@@ -12,10 +12,11 @@ COPY package*.json ./
 # Instalar dependências
 RUN npm ci
 
-# Copiar Prisma e fontes
+# Copiar Prisma, fontes e testes
 COPY prisma ./prisma
 COPY tsconfig*.json ./
 COPY src ./src
+COPY test ./test
 
 # Gerar Prisma Client dentro do builder
 RUN npx prisma generate
@@ -36,6 +37,7 @@ RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/dist ./dist
 COPY --from=builder /usr/src/app/prisma ./prisma
+COPY --from=builder /usr/src/app/test ./test
 COPY package*.json ./
 
 # 🔧 Correção: garantir permissão antes de mudar o usuário

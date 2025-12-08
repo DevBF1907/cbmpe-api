@@ -4,17 +4,52 @@ datasource db {
 }
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows"]
 }
 
 
 model User {
-  id        String   @id @default(uuid())
-  nome      String
-  email     String   @unique
-  patente   String
-  unidade   String
-  senha     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String       @id @default(uuid())
+  nome        String
+  email       String       @unique
+  patente     String
+  unidade     String
+  senha       String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  occurrences Occurrence[]
+}
+
+enum Prioridade {
+  BAIXA
+  MEDIA
+  ALTA
+  CRITICA
+}
+
+model Occurrence {
+  id         String      @id @default(uuid())
+  tipo       String
+  endereco   String
+  prioridade Prioridade  @default(MEDIA)
+  descricao  String
+  userId     String
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  signatures Signature[]
+
+  @@index([userId])
+}
+
+model Signature {
+  id           String     @id @default(uuid())
+  occurrenceId String
+  occurrence   Occurrence @relation(fields: [occurrenceId], references: [id], onDelete: Cascade)
+  assinatura   String     // Base64 da assinatura digital
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+
+  @@index([occurrenceId])
 }

@@ -7,6 +7,18 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Configuração CORS para React Native e outras aplicações
+  const allowedOrigins = process.env.ALLOWED_ORIGINS
+    ? process.env.ALLOWED_ORIGINS.split(',')
+    : true; // Em desenvolvimento, permite qualquer origem
+
+  app.enableCors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+  });
+
   // Pipes globais (opcional, mas recomendado)
   app.useGlobalPipes(
     new ValidationPipe({
@@ -14,7 +26,6 @@ async function bootstrap() {
       transform: true,
     }),
   );
-
 
   const config = new DocumentBuilder()
     .setTitle('CBMPE API')

@@ -51,7 +51,6 @@ describe('OccurrenceController (e2e)', () => {
 
     prisma = moduleFixture.get<PrismaService>(PrismaService);
 
-    // Criar usuário e obter token
     const registerResponse = await request(app.getHttpServer())
       .post('/auth/register')
       .send(testUser);
@@ -127,7 +126,6 @@ describe('OccurrenceController (e2e)', () => {
   });
 
   it('deve deletar uma ocorrência', async () => {
-    // Criar ocorrência temporária para deletar
     const createResponse = await request(app.getHttpServer())
       .post('/occurrences')
       .set('Authorization', `Bearer ${authToken}`)
