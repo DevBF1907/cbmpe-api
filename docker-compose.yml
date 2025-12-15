@@ -22,11 +22,15 @@ services:
       - .env
     ports:
       - "3000:3000"
+    volumes:
+      - ./test:/usr/src/app/test
+      - ./src:/usr/src/app/src
+      - ./tsconfig.json:/usr/src/app/tsconfig.json
+      - ./tsconfig.build.json:/usr/src/app/tsconfig.build.json
     depends_on:
       - db
     command: >
       sh -c "
-        npx prisma migrate deploy &&
         node dist/main.js
       "
 
