@@ -366,13 +366,10 @@ npm run test:e2e       # Testes end-to-end
 4. Push para a branch (`git push origin feature/AmazingFeature`)
 5. Abra um Pull Request
 
-## 📄 Licença
-
-Este projeto é privado e de uso interno do CBMPE.
 
 ## 👥 Autores
 
-Equipe de Desenvolvimento CBMPE
+DevBrenno
 
 ---
 
