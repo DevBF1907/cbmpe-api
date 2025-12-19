@@ -358,19 +358,8 @@ npm run test:cov       # Testes com cobertura
 npm run test:e2e       # Testes end-to-end
 ```
 
-## 🤝 Contribuindo
-
-1. Faça um fork do projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
-
-
 ## 👥 Autores
 
 DevBrenno
 
 ---
-
-Para mais informações sobre NestJS, visite [https://docs.nestjs.com](https://docs.nestjs.com)
